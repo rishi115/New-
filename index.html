@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prettiest Girl ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="horizontal-scroll-container">
+    
+    <!-- Video 1 -->
+    <section class="page">
+      <video src="images/1vid.mp4" autoplay muted loop playsinline></video>
+    </section>
+
+    <!-- Video 2 -->
+    <section class="page">
+      <video src="images/2vid.mp4" autoplay muted loop playsinline></video>
+    </section>
+
+    <!-- Video 3 with Pick-Up Line Game -->
+    <section class="page">
+     
+     <!-- Pick-Up Line Game -->
+      <h3>Complete the Pick-Up Line!</h3>
+      <div class="sentence">
+        <span class="drop-zone" id="drop1">_____</span>
+        <span class="drop-zone" id="drop2">_____</span>
+        <span class="drop-zone" id="drop3">_____</span>
+        <span class="drop-zone" id="drop4">_____</span>
+      </div>
+
+      <div>
+        <div class="draggable" id="word1" draggable="true" ondragstart="drag(event)">democratic</div>
+        <div class="draggable" id="word2" draggable="true" ondragstart="drag(event)">country</div>
+        <div class="draggable" id="word3" draggable="true" ondragstart="drag(event)">people</div>
+        <div class="draggable" id="word4" draggable="true" ondragstart="drag(event)">for</div>
+        <div class="draggable" id="word5" draggable="true" ondragstart="drag(event)">love</div>
+        <div class="draggable" id="word6" draggable="true" ondragstart="drag(event)">by</div>
+        <div class="draggable" id="word7" draggable="true" ondragstart="drag(event)">you</div>
+      </div>
+
+      <button id="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+
+      <div id="result"></div>
+
+      <div id="full-line"></div>
+
+      <div class="extra-words">
+        <div class="draggable" id="word8" draggable="true" ondragstart="drag(event)">call</div>
+        <div class="draggable" id="word9" draggable="true" ondragstart="drag(event)">me</div>
+        <div class="draggable" id="word10" draggable="true" ondragstart="drag(event)">here</div>
+      </div>
+    </section>
+
+    <!-- Final Love Page -->
+    <section class="page love-page">
+      <video class="bg-video" autoplay loop muted playsinline>
+        <source src="images/2.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Music -->
+      <audio id="background-music" loop>
+        <source src="images/4.mp3" type="audio/mp3" />
+      </audio>
+
+      <button class="play-music-btn" onclick="playMusic()">Play Music 🎵</button>
+
+      <div class="paper heart"></div>
+
+      <div class="paper image">
+        <p> and I fallen for u</p>
+        <img src="images/1.jpeg" />
+      </div>
+
+      <div class="paper image">
+        <p>How can be </p>
+        <p> someone so cute ❤️ </p>
+        <img src="images/2.png" />
+      </div>
+
+      <div class="paper">
+        <p class="p1">You are Cute </p>
+        <p class="p1">Amazing <span style="color: red;">❤️</span></p>
+      </div>
+
+      <div class="paper">
+        <p class="p1">Happy Birthday pretty little nicikhi!</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="mobile.js"></script>
+
+  <script>
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function checkAnswer() {
+      const result = document.getElementById('result');
+      const drop1 = document.getElementById('drop1').innerText;
+      const drop2 = document.getElementById('drop2').innerText;
+      const drop3 = document.getElementById('drop3').innerText;
+      const drop4 = document.getElementById('drop4').innerText;
+
+      if (drop1 === 'democratic' && drop2 === 'country' && drop3 === 'people' && drop4 === 'for') {
+        result.innerHTML = "<p>Correct! 🎉 You've completed the pick-up line!</p>";
+        document.getElementById('full-line').innerHTML = "Call me a democratic country, and call you people, because I am for you, by you, to you.";
+        document.getElementById('full-line').style.display = 'block';  // Show the full line
+      } else {
+        result.innerHTML = "<p>Oops! Try again.</p>";
+        document.getElementById('full-line').style.display = 'none';  // Hide the full line if the answer is incorrect
+      }
+    }
+
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.addEventListener('dragover', (event) => event.preventDefault());
+      zone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const draggedElement = document.getElementById(data);
+        zone.innerHTML = draggedElement.innerHTML;
+      });
+    });
+
+    function playMusic() {
+      document.getElementById("background-music").play();
+    }
+  </script>
+</body>
+</html>
